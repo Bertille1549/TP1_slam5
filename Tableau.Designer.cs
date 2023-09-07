@@ -31,23 +31,39 @@
             components = new System.ComponentModel.Container();
             bsClients = new BindingSource(components);
             dgvClients = new DataGridView();
+            commandesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
             SuspendLayout();
+            // 
+            // bsClients
+            // 
+            bsClients.DataSource = typeof(Entities.Client);
             // 
             // dgvClients
             // 
             dgvClients.AllowUserToAddRows = false;
             dgvClients.AllowUserToDeleteRows = false;
+            dgvClients.AutoGenerateColumns = false;
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvClients.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClients.Columns.AddRange(new DataGridViewColumn[] { commandesDataGridViewTextBoxColumn });
+            dgvClients.DataSource = bsClients;
+            dgvClients.Dock = DockStyle.Fill;
             dgvClients.Location = new Point(0, 0);
             dgvClients.Name = "dgvClients";
             dgvClients.ReadOnly = true;
             dgvClients.RowTemplate.Height = 25;
-            dgvClients.Size = new Size(240, 150);
+            dgvClients.Size = new Size(800, 450);
             dgvClients.TabIndex = 0;
+            // 
+            // commandesDataGridViewTextBoxColumn
+            // 
+            commandesDataGridViewTextBoxColumn.DataPropertyName = "Commandes";
+            commandesDataGridViewTextBoxColumn.HeaderText = "Commandes";
+            commandesDataGridViewTextBoxColumn.Name = "commandesDataGridViewTextBoxColumn";
+            commandesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // Tableau
             // 
@@ -66,5 +82,6 @@
 
         private BindingSource bsClients;
         private DataGridView dgvClients;
+        private DataGridViewTextBoxColumn commandesDataGridViewTextBoxColumn;
     }
 }
