@@ -29,11 +29,42 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            bsClients = new BindingSource(components);
+            dgvClients = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
+            SuspendLayout();
+            // 
+            // dgvClients
+            // 
+            dgvClients.AllowUserToAddRows = false;
+            dgvClients.AllowUserToDeleteRows = false;
+            dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvClients.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvClients.Location = new Point(0, 0);
+            dgvClients.Name = "dgvClients";
+            dgvClients.ReadOnly = true;
+            dgvClients.RowTemplate.Height = 25;
+            dgvClients.Size = new Size(240, 150);
+            dgvClients.TabIndex = 0;
+            // 
+            // Tableau
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(dgvClients);
+            Name = "Tableau";
             Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private BindingSource bsClients;
+        private DataGridView dgvClients;
     }
 }
