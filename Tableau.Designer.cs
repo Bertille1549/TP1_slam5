@@ -31,6 +31,10 @@
             components = new System.ComponentModel.Container();
             bsClients = new BindingSource(components);
             dgvClients = new DataGridView();
+            numcliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            nomcliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            prenomcliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            adrcliDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             commandesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)bsClients).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvClients).BeginInit();
@@ -48,7 +52,7 @@
             dgvClients.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvClients.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvClients.Columns.AddRange(new DataGridViewColumn[] { commandesDataGridViewTextBoxColumn });
+            dgvClients.Columns.AddRange(new DataGridViewColumn[] { numcliDataGridViewTextBoxColumn, nomcliDataGridViewTextBoxColumn, prenomcliDataGridViewTextBoxColumn, adrcliDataGridViewTextBoxColumn, commandesDataGridViewTextBoxColumn });
             dgvClients.DataSource = bsClients;
             dgvClients.Dock = DockStyle.Fill;
             dgvClients.Location = new Point(0, 0);
@@ -57,6 +61,38 @@
             dgvClients.RowTemplate.Height = 25;
             dgvClients.Size = new Size(800, 450);
             dgvClients.TabIndex = 0;
+            // 
+            // numcliDataGridViewTextBoxColumn
+            // 
+            numcliDataGridViewTextBoxColumn.DataPropertyName = "Numcli";
+            numcliDataGridViewTextBoxColumn.HeaderText = "Numcli";
+            numcliDataGridViewTextBoxColumn.Name = "numcliDataGridViewTextBoxColumn";
+            numcliDataGridViewTextBoxColumn.ReadOnly = true;
+            numcliDataGridViewTextBoxColumn.Width = 71;
+            // 
+            // nomcliDataGridViewTextBoxColumn
+            // 
+            nomcliDataGridViewTextBoxColumn.DataPropertyName = "Nomcli";
+            nomcliDataGridViewTextBoxColumn.HeaderText = "Nomcli";
+            nomcliDataGridViewTextBoxColumn.Name = "nomcliDataGridViewTextBoxColumn";
+            nomcliDataGridViewTextBoxColumn.ReadOnly = true;
+            nomcliDataGridViewTextBoxColumn.Width = 71;
+            // 
+            // prenomcliDataGridViewTextBoxColumn
+            // 
+            prenomcliDataGridViewTextBoxColumn.DataPropertyName = "Prenomcli";
+            prenomcliDataGridViewTextBoxColumn.HeaderText = "Prenomcli";
+            prenomcliDataGridViewTextBoxColumn.Name = "prenomcliDataGridViewTextBoxColumn";
+            prenomcliDataGridViewTextBoxColumn.ReadOnly = true;
+            prenomcliDataGridViewTextBoxColumn.Width = 86;
+            // 
+            // adrcliDataGridViewTextBoxColumn
+            // 
+            adrcliDataGridViewTextBoxColumn.DataPropertyName = "Adrcli";
+            adrcliDataGridViewTextBoxColumn.HeaderText = "Adrcli";
+            adrcliDataGridViewTextBoxColumn.Name = "adrcliDataGridViewTextBoxColumn";
+            adrcliDataGridViewTextBoxColumn.ReadOnly = true;
+            adrcliDataGridViewTextBoxColumn.Width = 63;
             // 
             // commandesDataGridViewTextBoxColumn
             // 
@@ -82,6 +118,10 @@
 
         private BindingSource bsClients;
         private DataGridView dgvClients;
+        private DataGridViewTextBoxColumn numcliDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nomcliDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn prenomcliDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn adrcliDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn commandesDataGridViewTextBoxColumn;
     }
 }
