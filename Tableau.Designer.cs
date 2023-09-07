@@ -109,6 +109,7 @@
             Controls.Add(dgvClients);
             Name = "Tableau";
             Text = "Form1";
+            Load += Tableau_Load;
             ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();
             ResumeLayout(false);
