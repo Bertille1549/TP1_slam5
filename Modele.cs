@@ -24,6 +24,16 @@ namespace TP1
         {
             return monModel.Commandes.ToList();
         }
+
+        public static List<Entities.Auteur> listeAuteur()
+        {
+            return monModel.Auteurs.ToList();
+        }
+
+        public static List<Entities.Partition> listePartition()
+        {
+            return monModel.Partitions.ToList();
+        }
     }
 }
 

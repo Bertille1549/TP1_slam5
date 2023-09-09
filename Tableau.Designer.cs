@@ -56,8 +56,10 @@
             dgvClients.DataSource = bsClients;
             dgvClients.Dock = DockStyle.Fill;
             dgvClients.Location = new Point(0, 0);
+            dgvClients.Margin = new Padding(3, 4, 3, 4);
             dgvClients.Name = "dgvClients";
             dgvClients.ReadOnly = true;
+            dgvClients.RowHeadersWidth = 51;
             dgvClients.RowTemplate.Height = 25;
             dgvClients.Size = new Size(800, 450);
             dgvClients.TabIndex = 0;
@@ -66,49 +68,57 @@
             // 
             numcliDataGridViewTextBoxColumn.DataPropertyName = "Numcli";
             numcliDataGridViewTextBoxColumn.HeaderText = "Numcli";
+            numcliDataGridViewTextBoxColumn.MinimumWidth = 6;
             numcliDataGridViewTextBoxColumn.Name = "numcliDataGridViewTextBoxColumn";
             numcliDataGridViewTextBoxColumn.ReadOnly = true;
-            numcliDataGridViewTextBoxColumn.Width = 71;
+            numcliDataGridViewTextBoxColumn.Width = 85;
             // 
             // nomcliDataGridViewTextBoxColumn
             // 
             nomcliDataGridViewTextBoxColumn.DataPropertyName = "Nomcli";
             nomcliDataGridViewTextBoxColumn.HeaderText = "Nomcli";
+            nomcliDataGridViewTextBoxColumn.MinimumWidth = 6;
             nomcliDataGridViewTextBoxColumn.Name = "nomcliDataGridViewTextBoxColumn";
             nomcliDataGridViewTextBoxColumn.ReadOnly = true;
-            nomcliDataGridViewTextBoxColumn.Width = 71;
+            nomcliDataGridViewTextBoxColumn.Width = 86;
             // 
             // prenomcliDataGridViewTextBoxColumn
             // 
             prenomcliDataGridViewTextBoxColumn.DataPropertyName = "Prenomcli";
             prenomcliDataGridViewTextBoxColumn.HeaderText = "Prenomcli";
+            prenomcliDataGridViewTextBoxColumn.MinimumWidth = 6;
             prenomcliDataGridViewTextBoxColumn.Name = "prenomcliDataGridViewTextBoxColumn";
             prenomcliDataGridViewTextBoxColumn.ReadOnly = true;
-            prenomcliDataGridViewTextBoxColumn.Width = 86;
+            prenomcliDataGridViewTextBoxColumn.Width = 104;
             // 
             // adrcliDataGridViewTextBoxColumn
             // 
             adrcliDataGridViewTextBoxColumn.DataPropertyName = "Adrcli";
             adrcliDataGridViewTextBoxColumn.HeaderText = "Adrcli";
+            adrcliDataGridViewTextBoxColumn.MinimumWidth = 6;
             adrcliDataGridViewTextBoxColumn.Name = "adrcliDataGridViewTextBoxColumn";
             adrcliDataGridViewTextBoxColumn.ReadOnly = true;
-            adrcliDataGridViewTextBoxColumn.Width = 63;
+            adrcliDataGridViewTextBoxColumn.Width = 77;
             // 
             // commandesDataGridViewTextBoxColumn
             // 
             commandesDataGridViewTextBoxColumn.DataPropertyName = "Commandes";
             commandesDataGridViewTextBoxColumn.HeaderText = "Commandes";
+            commandesDataGridViewTextBoxColumn.MinimumWidth = 6;
             commandesDataGridViewTextBoxColumn.Name = "commandesDataGridViewTextBoxColumn";
             commandesDataGridViewTextBoxColumn.ReadOnly = true;
+            commandesDataGridViewTextBoxColumn.Width = 121;
             // 
             // Tableau
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(dgvClients);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Tableau";
-            Text = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "TabClient";
             Load += Tableau_Load;
             ((System.ComponentModel.ISupportInitialize)bsClients).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvClients).EndInit();

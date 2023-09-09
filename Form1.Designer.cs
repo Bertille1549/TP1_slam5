@@ -29,46 +29,50 @@
         private void InitializeComponent()
         {
             menuStrip1 = new MenuStrip();
-            commandeToolStripMenuItem = new ToolStripMenuItem();
-            clientToolStripMenuItem = new ToolStripMenuItem();
-            partitionToolStripMenuItem = new ToolStripMenuItem();
-            auteurToolStripMenuItem = new ToolStripMenuItem();
+            commande = new ToolStripMenuItem();
+            client = new ToolStripMenuItem();
+            partition = new ToolStripMenuItem();
+            auteur = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { commandeToolStripMenuItem, clientToolStripMenuItem, partitionToolStripMenuItem, auteurToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { commande, client, partition, auteur });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // commandeToolStripMenuItem
+            // commande
             // 
-            commandeToolStripMenuItem.Name = "commandeToolStripMenuItem";
-            commandeToolStripMenuItem.Size = new Size(100, 24);
-            commandeToolStripMenuItem.Text = "Commande";
+            commande.Name = "commande";
+            commande.Size = new Size(100, 24);
+            commande.Text = "Commande";
+            commande.Click += commande_Click;
             // 
-            // clientToolStripMenuItem
+            // client
             // 
-            clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-            clientToolStripMenuItem.Size = new Size(61, 24);
-            clientToolStripMenuItem.Text = "Client";
+            client.Name = "client";
+            client.Size = new Size(61, 24);
+            client.Text = "Client";
+            client.Click += client_Click;
             // 
-            // partitionToolStripMenuItem
+            // partition
             // 
-            partitionToolStripMenuItem.Name = "partitionToolStripMenuItem";
-            partitionToolStripMenuItem.Size = new Size(78, 24);
-            partitionToolStripMenuItem.Text = "Partition";
+            partition.Name = "partition";
+            partition.Size = new Size(78, 24);
+            partition.Text = "Partition";
+            partition.Click += partition_Click;
             // 
-            // auteurToolStripMenuItem
+            // auteur
             // 
-            auteurToolStripMenuItem.Name = "auteurToolStripMenuItem";
-            auteurToolStripMenuItem.Size = new Size(67, 24);
-            auteurToolStripMenuItem.Text = "Auteur";
+            auteur.Name = "auteur";
+            auteur.Size = new Size(67, 24);
+            auteur.Text = "Auteur";
+            auteur.Click += auteur_Click;
             // 
             // Form1
             // 
@@ -78,6 +82,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -88,9 +93,9 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem commandeToolStripMenuItem;
-        private ToolStripMenuItem clientToolStripMenuItem;
-        private ToolStripMenuItem partitionToolStripMenuItem;
-        private ToolStripMenuItem auteurToolStripMenuItem;
+        private ToolStripMenuItem commande;
+        private ToolStripMenuItem client;
+        private ToolStripMenuItem partition;
+        private ToolStripMenuItem auteur;
     }
 }

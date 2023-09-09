@@ -62,7 +62,9 @@
             ClientSize = new Size(800, 450);
             Controls.Add(dgvCommande);
             Name = "TabCommande";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "TabCommande";
+            Load += TabCommande_Load;
             ((System.ComponentModel.ISupportInitialize)bsCommande).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvCommande).EndInit();
             ResumeLayout(false);

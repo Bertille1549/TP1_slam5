@@ -17,5 +17,28 @@ namespace TP1
             InitializeComponent();
         }
 
+        private void commande_Click(object sender, EventArgs e)
+        {
+            TabCommande commande = new TabCommande();
+            commande.Show();
+        }
+
+        private void client_Click(object sender, EventArgs e)
+        {
+            Tableau client = new Tableau();
+            client.Show();
+        }
+
+        private void partition_Click(object sender, EventArgs e)
+        {
+            TabPartition partition = new TabPartition();
+            partition.Show();
+        }
+
+        private void auteur_Click(object sender, EventArgs e)
+        {
+            TabAuteur auteur = new TabAuteur();
+            auteur.Show();
+        }
     }
 }

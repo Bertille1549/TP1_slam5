@@ -7,20 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TP1.Entities;
 
 namespace TP1
 {
-    public partial class TabCommande : Form
+    public partial class TabAuteur : Form
     {
-        public TabCommande()
+        public TabAuteur()
         {
             InitializeComponent();
         }
 
-        private void TabCommande_Load(object sender, EventArgs e)
+        private void TabAuteur_Load(object sender, EventArgs e)
         {
-            bsCommande.DataSource = Modele.listeCommande(); //appel de la méthode listeCommande
-            dgvCommande.DataSource = bsCommande;
+            bsAuteur.DataSource = Modele.listeAuteur(); //appel de la méthode listeAuteur
+            dgvAuteur.DataSource = bsAuteur;
         }
     }
 }
