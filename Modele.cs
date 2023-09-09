@@ -15,9 +15,14 @@ namespace TP1
             monModel = new BddPartitionsBpContext();
         }
 
-        public static List<Client> listeClients()
+        public static List<Entities.Client> listeClients()
         {
             return monModel.Clients.ToList();
+        }
+
+        public static List<Entities.Commande> listeCommande()
+        {
+            return monModel.Commandes.ToList();
         }
     }
 }
