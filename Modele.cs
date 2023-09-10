@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,9 @@ namespace TP1
             return monModel.Clients.ToList();
         }
 
-        public static List<Entities.Commande> listeCommande()
+        public static List<Commande> listeCommande()
         {
-            return monModel.Commandes.ToList();
+            return monModel.Commandes.Include(a => a.NumcliNavigation).ToList();
         }
 
         public static List<Entities.Auteur> listeAuteur()

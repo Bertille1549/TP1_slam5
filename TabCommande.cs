@@ -19,7 +19,16 @@ namespace TP1
 
         private void TabCommande_Load(object sender, EventArgs e)
         {
-            bsCommande.DataSource = Modele.listeCommande(); //appel de la méthode listeCommande
+            //bsCommande.DataSource = Modele.listeCommande(); //appel de la méthode listeCommande
+            //appel de la méthode listeCommande avec un select pour n'afficher que les champs voulus
+            bsCommande.DataSource = Modele.listeCommande().Select(x => new
+            {
+                x.Numcde,
+                x.Montantcde,
+                x.Datecde,
+                x.NumcliNavigation.Nomcli,
+                x.NumcliNavigation.Prenomcli
+            });
             dgvCommande.DataSource = bsCommande;
         }
     }
