@@ -21,10 +21,24 @@ namespace TP1
         private void TabCommande_Load(object sender, EventArgs e)
         {
             //Liste des commande ... par client
+            /*/
             cbClients.ValueMember = "NUMCLI"; //permet de stocker l'identifiant
             cbClients.DisplayMember = "NOMCLI";
             bsClients2.DataSource = Modele.listeClients();
             cbClients.DataSource = bsClients2;
+            */
+
+            cbClients.ValueMember = "NUMCLI";
+            cbClients.DisplayMember = "nomComplet";
+            // nomComplet est la concaténation du nom et prénom issu de la requête suivante
+
+            bsClients2.DataSource = (Modele.listeClients()).Select(x => new {
+                x.Numcli,
+                nomComplet = x.Nomcli + " " + x.Prenomcli,
+                //x.Emailcli
+            });
+            cbClients.DataSource = bsClients2;
+
 
             //bsCommande.DataSource = Modele.listeCommande(); //appel de la méthode listeCommande
             //appel de la méthode listeCommande avec un select pour n'afficher que les champs voulus
