@@ -26,6 +26,14 @@ namespace TP1
             return monModel.Commandes.Include(a => a.NumcliNavigation).ToList();
         }
 
+        public static List<Commande> listeCommandesParClient(int idClient)
+        {
+            List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Numcli ==
+           idClient).Include(p => p.NumcliNavigation).ToList();
+            return lesCommandes;
+        }
+
+
         public static List<Entities.Auteur> listeAuteur()
         {
             return monModel.Auteurs.ToList();
