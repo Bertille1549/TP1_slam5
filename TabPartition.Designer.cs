@@ -31,8 +31,11 @@
             components = new System.ComponentModel.Container();
             bsPartition = new BindingSource(components);
             dgvPartition = new DataGridView();
+            cbStyle = new ComboBox();
+            bsStyle = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)bsPartition).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPartition).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsStyle).BeginInit();
             SuspendLayout();
             // 
             // bsPartition
@@ -46,27 +49,40 @@
             dgvPartition.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvPartition.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvPartition.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPartition.Dock = DockStyle.Fill;
-            dgvPartition.Location = new Point(0, 0);
+            dgvPartition.Location = new Point(0, 183);
+            dgvPartition.Margin = new Padding(3, 2, 3, 2);
             dgvPartition.Name = "dgvPartition";
             dgvPartition.ReadOnly = true;
             dgvPartition.RowHeadersWidth = 51;
             dgvPartition.RowTemplate.Height = 29;
-            dgvPartition.Size = new Size(800, 450);
+            dgvPartition.Size = new Size(700, 155);
             dgvPartition.TabIndex = 0;
+            // 
+            // cbStyle
+            // 
+            cbStyle.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbStyle.FormattingEnabled = true;
+            cbStyle.Location = new Point(198, 73);
+            cbStyle.Margin = new Padding(3, 2, 3, 2);
+            cbStyle.Name = "cbStyle";
+            cbStyle.Size = new Size(234, 23);
+            cbStyle.TabIndex = 2;
             // 
             // TabPartition
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(700, 338);
+            Controls.Add(cbStyle);
             Controls.Add(dgvPartition);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "TabPartition";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "TabPartition";
             Load += TabPartition_Load;
             ((System.ComponentModel.ISupportInitialize)bsPartition).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvPartition).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsStyle).EndInit();
             ResumeLayout(false);
         }
 
@@ -74,5 +90,7 @@
 
         private BindingSource bsPartition;
         private DataGridView dgvPartition;
+        private ComboBox cbStyle;
+        private BindingSource bsStyle;
     }
 }
