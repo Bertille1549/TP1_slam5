@@ -68,6 +68,11 @@
             cbStyle.Size = new Size(234, 23);
             cbStyle.TabIndex = 2;
             // 
+            // bsStyle
+            // 
+            bsStyle.DataSource = typeof(Entities.Style);
+            bsStyle.CurrentChanged += bsStyle_CurrentChanged;
+            // 
             // TabPartition
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);

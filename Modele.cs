@@ -41,7 +41,19 @@ namespace TP1
 
         public static List<Entities.Partition> listePartition()
         {
-            return monModel.Partitions.ToList();
+            return monModel.Partitions.Include(a => a.NumstyleNavigation).ToList();
+        }
+
+        public static List<Entities.Style> listeStyle()
+        {
+            return monModel.Styles.ToList();
+        }
+
+        public static List<Partition> listePartitionParStyle(int idStyle)
+        {
+            List<Partition> lesPartitions = monModel.Partitions.Where(p => p.Numstyle ==
+           idStyle).Include(p => p.NumstyleNavigation).ToList();
+            return lesPartitions;
         }
     }
 }
