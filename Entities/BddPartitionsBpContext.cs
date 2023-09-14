@@ -56,6 +56,8 @@ public partial class BddPartitionsBpContext : DbContext
 
             entity.ToTable("client");
 
+            entity.HasIndex(e => e.Telcli, "TELCLI").IsUnique();
+
             entity.Property(e => e.Numcli)
                 .HasColumnType("int(11)")
                 .HasColumnName("NUMCLI");
@@ -68,6 +70,9 @@ public partial class BddPartitionsBpContext : DbContext
             entity.Property(e => e.Prenomcli)
                 .HasMaxLength(128)
                 .HasColumnName("PRENOMCLI");
+            entity.Property(e => e.Telcli)
+                .HasMaxLength(10)
+                .HasColumnName("TELCLI");
         });
 
         modelBuilder.Entity<Commande>(entity =>
