@@ -33,6 +33,7 @@
             dgvCommande = new DataGridView();
             cbClients = new ComboBox();
             bsClients2 = new BindingSource(components);
+            btnAjout = new Button();
             ((System.ComponentModel.ISupportInitialize)bsCommande).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvCommande).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsClients2).BeginInit();
@@ -49,19 +50,19 @@
             dgvCommande.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvCommande.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvCommande.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCommande.Location = new Point(0, 218);
+            dgvCommande.Location = new Point(79, 136);
             dgvCommande.Name = "dgvCommande";
             dgvCommande.ReadOnly = true;
             dgvCommande.RowHeadersWidth = 51;
             dgvCommande.RowTemplate.Height = 29;
-            dgvCommande.Size = new Size(623, 231);
+            dgvCommande.Size = new Size(623, 195);
             dgvCommande.TabIndex = 0;
             // 
             // cbClients
             // 
             cbClients.DropDownStyle = ComboBoxStyle.DropDownList;
             cbClients.FormattingEnabled = true;
-            cbClients.Location = new Point(198, 66);
+            cbClients.Location = new Point(250, 70);
             cbClients.Name = "cbClients";
             cbClients.Size = new Size(267, 28);
             cbClients.TabIndex = 1;
@@ -71,11 +72,22 @@
             bsClients2.DataSource = typeof(Entities.Client);
             bsClients2.CurrentChanged += bsClients2_CurrentChanged;
             // 
+            // btnAjout
+            // 
+            btnAjout.Location = new Point(336, 358);
+            btnAjout.Name = "btnAjout";
+            btnAjout.Size = new Size(94, 29);
+            btnAjout.TabIndex = 2;
+            btnAjout.Text = "AJOUTER";
+            btnAjout.UseVisualStyleBackColor = true;
+            btnAjout.Click += btnAjout_Click;
+            // 
             // TabCommande
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnAjout);
             Controls.Add(cbClients);
             Controls.Add(dgvCommande);
             Name = "TabCommande";
@@ -94,5 +106,6 @@
         private DataGridView dgvCommande;
         private ComboBox cbClients;
         private BindingSource bsClients2;
+        private Button btnAjout;
     }
 }

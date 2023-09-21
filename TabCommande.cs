@@ -32,7 +32,8 @@ namespace TP1
             cbClients.DisplayMember = "nomComplet";
             // nomComplet est la concaténation du nom et prénom issu de la requête suivante
 
-            bsClients2.DataSource = (Modele.listeClients()).Select(x => new {
+            bsClients2.DataSource = (Modele.listeClients()).Select(x => new
+            {
                 x.Numcli,
                 nomComplet = x.Nomcli + " " + x.Prenomcli,
                 //x.Emailcli
@@ -73,6 +74,13 @@ namespace TP1
             .OrderBy(x => x.Datecde);
             dgvCommande.DataSource = bsCommande;
 
+        }
+
+        private void btnAjout_Click(object sender, EventArgs e)
+        {
+            FormGestionCommandes gestion = new FormGestionCommandes();
+            //gestion.Show();
+            gestion.ShowDialog();
         }
     }
 }
