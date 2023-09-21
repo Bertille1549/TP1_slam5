@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TP1.Entities;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace TP1
 {
@@ -55,6 +57,28 @@ namespace TP1
            idStyle).Include(p => p.NumstyleNavigation).ToList();
             return lesPartitions;
         }
+
+        public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
+        {
+            Commande maCommande;
+            bool vretour = true;
+            try
+            {
+                maCommande = new Commande();
+                maCommande.Montantcde = montant; // mise à jour des propriétés
+                maCommande.Datecde = dateC.Date; // la propriété DateCde doit être en DateTime dans la BD et dans la classe Commande, modifier si besoin.
+                maCommande.Numcli = idClient;
+                // ajout de l’objet : correspond à un insert
+                monModel.Commandes.Add(maCommande);
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+            }
+            return vretour;
+        }
+
     }
 }
 

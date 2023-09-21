@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,7 +20,8 @@ namespace TP1
 
         private void dtpCommande_ValueChanged(object sender, EventArgs e)
         {
-
+            dtpCommande.Enabled = true;
+            dtpCommande.MinDate = new DateTime(2023, 08, 01);
         }
 
         private void FormGestionCommandes_Load(object sender, EventArgs e)
@@ -34,18 +36,30 @@ namespace TP1
                 nomComplet = x.Nomcli + " " + x.Prenomcli,
             });
             cbListeCli.DataSource = bsClients3;
+            cbListeCli.SelectedIndex = -1;
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (textMontant.Text == "" || textMontant.TabIndex <= 0)
+            try
             {
-                MessageBox.Show("Veuillez entre un montant et un entier positif pour la commande");
+                int montant = int.Parse(textMontant.Text);
+
+                if (textMontant.Text == "" || montant <= 0)
+                {
+                    MessageBox.Show("Veuillez entre un montant entier positif pour la commande !");
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Veuillez entre un montant entier positif pour la commande !");
+
             }
 
-            if (cbListeCli.SelectedIndex == 0)
+            if (cbListeCli.SelectedIndex == -1)
             {
-                cbListeCli.SelectedIndex = -1;
+                MessageBox.Show("Veuillez choisir un client pour la commande !");
             }
 
         }

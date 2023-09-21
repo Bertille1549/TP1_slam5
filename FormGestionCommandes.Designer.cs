@@ -79,7 +79,6 @@
             // lbl_montant
             // 
             lbl_montant.AutoSize = true;
-            lbl_montant.Enabled = false;
             lbl_montant.Location = new Point(145, 113);
             lbl_montant.Name = "lbl_montant";
             lbl_montant.Size = new Size(72, 20);
