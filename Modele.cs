@@ -62,11 +62,12 @@ namespace TP1
         {
             Commande maCommande;
             bool vretour = true;
+            DateOnly dtC = DateOnly.FromDateTime(unDtpCommande);
             try
-            {
+            {                
                 maCommande = new Commande();
                 maCommande.Montantcde = montant; // mise à jour des propriétés
-                maCommande.Datecde = dateC.Date; // la propriété DateCde doit être en DateTime dans la BD et dans la classe Commande, modifier si besoin.
+                maCommande.Datecde = dtC; // la propriété DateCde est en date dans la BD et dans la classe Commande, modifier si besoin.
                 maCommande.Numcli = idClient;
                 // ajout de l’objet : correspond à un insert
                 monModel.Commandes.Add(maCommande);

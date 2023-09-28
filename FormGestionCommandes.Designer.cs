@@ -111,6 +111,7 @@
             btn_annuler.TabIndex = 7;
             btn_annuler.Text = "Annuler";
             btn_annuler.UseVisualStyleBackColor = true;
+            btn_annuler.Click += btn_annuler_Click;
             // 
             // btn_fermer
             // 
@@ -120,6 +121,7 @@
             btn_fermer.TabIndex = 8;
             btn_fermer.Text = "Fermer";
             btn_fermer.UseVisualStyleBackColor = true;
+            btn_fermer.Click += btn_fermer_Click;
             // 
             // FormGestionCommandes
             // 

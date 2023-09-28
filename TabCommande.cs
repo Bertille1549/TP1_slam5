@@ -39,6 +39,7 @@ namespace TP1
                 //x.Emailcli
             });
             cbClients.DataSource = bsClients2;
+            cbClients.SelectedIndex = -1;
 
 
             //bsCommande.DataSource = Modele.listeCommande(); //appel de la méthode listeCommande

@@ -29,6 +29,7 @@ namespace TP1
             cbStyle.DisplayMember = "LIBSTYLE";
             bsStyle.DataSource = Modele.listeStyle();
             cbStyle.DataSource = bsStyle;
+            cbStyle.SelectedIndex = -1;
         }
 
         private void bsStyle_CurrentChanged(object sender, EventArgs e)
