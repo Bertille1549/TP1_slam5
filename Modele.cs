@@ -62,7 +62,7 @@ namespace TP1
         {
             Commande maCommande;
             bool vretour = true;
-            DateOnly dtC = DateOnly.FromDateTime(unDtpCommande);
+            DateOnly dtC = DateOnly.FromDateTime(dateC);
             try
             {                
                 maCommande = new Commande();
@@ -78,6 +78,11 @@ namespace TP1
                 vretour = false;
             }
             return vretour;
+        }
+
+        public static int RetourneDerniereCommandeSaisie()
+        {
+            return monModel.Commandes.Max(x => x.Numcde);
         }
 
     }

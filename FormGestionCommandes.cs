@@ -27,14 +27,6 @@ namespace TP1
             dtpCommande.MinDate = new DateTime(2023, 08, 01);
         }
 
-        public DateTimePicker unDtpCommande
-        {
-            get
-            {
-                return dtpCommande;
-            }
-        }
-
         private void FormGestionCommandes_Load(object sender, EventArgs e)
         {
             cbListeCli.ValueMember = "NUMCLI";
@@ -52,7 +44,50 @@ namespace TP1
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            try
+            int numCli = -1, montant = 0;
+            DateTime dtCommande;
+
+            if (textMontant.Text != "" || montant >= 0 && cbListeCli.SelectedIndex != -1)
+            {
+                // ajout possible si les champs monatnt et client sont remplis au moins
+                if (Convert.ToInt32(textMontant.Text) >= 0 && Convert.ToInt32(textMontant.Text) <= 150)
+                {
+                    // ajout possible si le montant est correcte
+                    montant = Convert.ToInt32(textMontant.Text);
+                    dtCommande = dtpCommande.Value;
+                    numCli = Convert.ToInt32(cbListeCli.SelectedValue);
+
+                    if (Modele.AjoutCommande(montant, dtCommande, numCli))
+                    {
+                        MessageBox.Show("Commande ajoutée" + Modele.RetourneDerniereCommandeSaisie());
+                        btn_annuler_Click(sender, e);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ajout impossible : problème sur le montant", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ajout impossible : Il faut saisir au moins le montant et le client", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error );
+            }
+        }
+
+        private void btn_fermer_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_annuler_Click(object sender, EventArgs e)
+        {
+            textMontant.Clear();
+            dtpCommande.Value = DateTime.Now;
+            cbListeCli.SelectedIndex = -1;
+        }
+
+        /* BROUILLON
+         *             try
             {
                 int montant = int.Parse(textMontant.Text);
                 //dtpCommande = DateTime(dtpCommande);
@@ -89,21 +124,10 @@ namespace TP1
             {
                 MessageBox.Show("Veuillez choisir un client pour la commande !");
             }
-
-
-
-        }
-
-        private void btn_fermer_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btn_annuler_Click(object sender, EventArgs e)
-        {
-            textMontant.Text = "";
-            dtpCommande.Value = DateTime.Now;
-            cbListeCli.SelectedIndex = -1;
-        }
+         * 
+         * 
+         * 
+         * 
+         * */
     }
 }
