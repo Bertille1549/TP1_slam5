@@ -79,8 +79,13 @@ namespace TP1
 
         private void btnAjout_Click(object sender, EventArgs e)
         {
-            FormGestionCommandes gestion = new FormGestionCommandes();
-            //gestion.Show();
+            FormGestionCommandes gestion = new FormGestionCommandes(EtatGestion.Create);
+            gestion.ShowDialog();
+        }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            FormGestionCommandes gestion = new FormGestionCommandes(EtatGestion.Update);
             gestion.ShowDialog();
         }
     }

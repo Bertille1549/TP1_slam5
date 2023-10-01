@@ -32,14 +32,18 @@
             textMontant = new TextBox();
             dtpCommande = new DateTimePicker();
             cbListeCli = new ComboBox();
-            btnOk = new Button();
+            btnAjout = new Button();
             lbl_montant = new Label();
             lbl_client = new Label();
             lbl_date = new Label();
             btn_annuler = new Button();
             btn_fermer = new Button();
             bsClients3 = new BindingSource(components);
+            cbCommandes = new ComboBox();
+            bsCommandes = new BindingSource(components);
+            lblAM = new Label();
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             SuspendLayout();
             // 
             // textMontant
@@ -66,15 +70,15 @@
             cbListeCli.Size = new Size(151, 28);
             cbListeCli.TabIndex = 2;
             // 
-            // btnOk
+            // btnAjout
             // 
-            btnOk.Location = new Point(279, 285);
-            btnOk.Name = "btnOk";
-            btnOk.Size = new Size(94, 29);
-            btnOk.TabIndex = 3;
-            btnOk.Text = "OK";
-            btnOk.UseVisualStyleBackColor = true;
-            btnOk.Click += btnOk_Click;
+            btnAjout.Location = new Point(279, 285);
+            btnAjout.Name = "btnAjout";
+            btnAjout.Size = new Size(94, 29);
+            btnAjout.TabIndex = 3;
+            btnAjout.Text = "Ajouter";
+            btnAjout.UseVisualStyleBackColor = true;
+            btnAjout.Click += btnAjout_Click;
             // 
             // lbl_montant
             // 
@@ -123,17 +127,38 @@
             btn_fermer.UseVisualStyleBackColor = true;
             btn_fermer.Click += btn_fermer_Click;
             // 
+            // cbCommandes
+            // 
+            cbCommandes.FormattingEnabled = true;
+            cbCommandes.Location = new Point(350, 52);
+            cbCommandes.Name = "cbCommandes";
+            cbCommandes.Size = new Size(189, 28);
+            cbCommandes.TabIndex = 9;
+            // 
+            // lblAM
+            // 
+            lblAM.AutoSize = true;
+            lblAM.Font = new Font("Elephant", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            lblAM.Location = new Point(33, 21);
+            lblAM.Name = "lblAM";
+            lblAM.Size = new Size(294, 33);
+            lblAM.TabIndex = 10;
+            lblAM.Text = "Ajout d'une commande";
+            lblAM.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // FormGestionCommandes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblAM);
+            Controls.Add(cbCommandes);
             Controls.Add(btn_fermer);
             Controls.Add(btn_annuler);
             Controls.Add(lbl_date);
             Controls.Add(lbl_client);
             Controls.Add(lbl_montant);
-            Controls.Add(btnOk);
+            Controls.Add(btnAjout);
             Controls.Add(cbListeCli);
             Controls.Add(dtpCommande);
             Controls.Add(textMontant);
@@ -141,6 +166,7 @@
             Text = "FormGestionCommandes";
             Load += FormGestionCommandes_Load;
             ((System.ComponentModel.ISupportInitialize)bsClients3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsCommandes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -150,12 +176,15 @@
         private TextBox textMontant;
         private DateTimePicker dtpCommande;
         private ComboBox cbListeCli;
-        private Button btnOk;
+        private Button btnAjout;
         private Label lbl_montant;
         private Label lbl_client;
         private Label lbl_date;
         private Button btn_annuler;
         private Button btn_fermer;
         private BindingSource bsClients3;
+        private ComboBox cbCommandes;
+        private BindingSource bsCommandes;
+        private Label lblAM;
     }
 }

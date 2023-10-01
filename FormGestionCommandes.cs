@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +16,23 @@ using TP1.Entities;
 
 namespace TP1
 {
+    public enum EtatGestion
+    {
+        Create,
+        Update
+    }
     public partial class FormGestionCommandes : Form
     {
-        public FormGestionCommandes()
+        private EtatGestion etat;
+        public FormGestionCommandes(EtatGestion etat)
         {
             InitializeComponent();
+            this.etat = etat; // pour savoir si on est en create ou update
+        }
+        // bouton fermer
+        private void btn_fermer_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void dtpCommande_ValueChanged(object sender, EventArgs e)
@@ -27,8 +41,34 @@ namespace TP1
             dtpCommande.MinDate = new DateTime(2023, 08, 01);
         }
 
+        private void remplirListeCommandes()
+        {
+            // remplir la combobox des commandes (si modification)
+            cbCommandes.ValueMember = "Numcde";
+            cbCommandes.DisplayMember = "Datecde";
+            bsCommandes.DataSource = Modele.listeCommande();
+            cbCommandes.DataSource = bsCommandes;
+        }
+
         private void FormGestionCommandes_Load(object sender, EventArgs e)
         {
+            remplirListeCommandes();
+
+            if (etat == EtatGestion.Create) // cas etat create
+            {
+                lblAM.Text = "Ajout d'une commande";
+                btnAjout.Text = "Ajouter";
+                cbCommandes.Visible = false;
+            }
+            else // cas etat update
+            {
+                lblAM.Text = "Modification d'une commande";
+                btnAjout.Text = "Modifier";
+                btnAjout.Visible = false;
+                cbCommandes.Visible = true;
+                remplirListeCommandes();
+            }
+
             cbListeCli.ValueMember = "NUMCLI";
             cbListeCli.DisplayMember = "nomComplet";
             // nomComplet est la concaténation du nom et prénom issu de la requête suivante
@@ -42,7 +82,8 @@ namespace TP1
             cbListeCli.SelectedIndex = -1;
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        // Ajout et modification d'une commande en fonction de son état
+        private void btnAjout_Click(object sender, EventArgs e)
         {
             int numCli = -1, montant = 0;
             DateTime dtCommande;
@@ -57,11 +98,22 @@ namespace TP1
                     dtCommande = dtpCommande.Value;
                     numCli = Convert.ToInt32(cbListeCli.SelectedValue);
 
-                    if (Modele.AjoutCommande(montant, dtCommande, numCli))
+                    if (etat == EtatGestion.Create) // cas de l'ajout
                     {
-                        MessageBox.Show("Commande ajoutée" + Modele.RetourneDerniereCommandeSaisie());
-                        btn_annuler_Click(sender, e);
+                        if (Modele.AjoutCommande(montant, dtCommande, numCli))
+                        {
+                            MessageBox.Show("Commande ajoutée" + Modele.RetourneDerniereCommandeSaisie());
+                            btn_annuler_Click(sender, e);
+                        }
                     }
+                    if (etat == EtatGestion.Update) // cas de la mise à jour
+                    {
+                        Commande commande = (Commande)bsCommandes.Current;
+                        //if (Modele.)
+
+                    }
+
+
                 }
                 else
                 {
@@ -70,14 +122,11 @@ namespace TP1
             }
             else
             {
-                MessageBox.Show("Ajout impossible : Il faut saisir au moins le montant et le client", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error );
+                MessageBox.Show("Ajout impossible : Il faut saisir au moins le montant et le client", "ERREUR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void btn_fermer_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+
 
         private void btn_annuler_Click(object sender, EventArgs e)
         {
@@ -86,48 +135,24 @@ namespace TP1
             cbListeCli.SelectedIndex = -1;
         }
 
-        /* BROUILLON
-         *             try
+        private void bsCommandes_CurrentChanged(Object sender, EventArgs e)
+        {
+            // si 1 commande est sélectionnée dans la liste
+            if (cbCommandes.SelectedIndex != -1)
             {
-                int montant = int.Parse(textMontant.Text);
-                //dtpCommande = DateTime(dtpCommande);
+                // récup' de la commande sélectionnée
+                Commande commande = (Commande)bsCommandes.Current;
 
-                if (textMontant.Text == "" || montant <= 0)
-                {
-                    MessageBox.Show("Veuillez entre un montant entier positif pour la commande !");
-                }
-                else
-                {
-                    if (cbListeCli.SelectedIndex == -1)
-                    {
-                        MessageBox.Show("Veuillez choisir un client pour la commande !");
-                    }
-                    else
-                    {
-                        using (var commande = new BddPartitionsBpContext())
-                        {
-                            DateOnly dtCommande = DateOnly.FromDateTime(dtpCommande.Value);
-                            int numCli = int.Parse(cbListeCli.ValueMember);
-                            var commandeClient = new Commande { Montantcde = montant, Datecde = dtCommande, Numcli = numCli};
-                        }
-                    }
-                }
+                //mise à jour des champs de la commande sélectionnée
+                textMontant.Text = commande.Montantcde.ToString();
+                //dtpCommande.Value = commande.Datecde.ToString(DateTime(dtpCommande));
+                cbListeCli.Text = commande.NumcliNavigation.Nomcli;
+
+                btnAjout.Visible = true;
 
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Veuillez entre un montant entier positif pour la commande !");
+        }
 
-            }
 
-            if (cbListeCli.SelectedIndex == -1)
-            {
-                MessageBox.Show("Veuillez choisir un client pour la commande !");
-            }
-         * 
-         * 
-         * 
-         * 
-         * */
     }
 }
