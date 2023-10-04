@@ -85,6 +85,44 @@ namespace TP1
             return monModel.Commandes.Max(x => x.Numcde);
         }
 
+        public static Commande RecupererCommande(int idCommande)
+        {
+            Commande uneCommande = new Commande();
+            try
+            {
+                uneCommande = monModel.Commandes.First(x => x.Numcde == idCommande);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return uneCommande;
+        }
+
+        public static bool ModifierCommande(int idCde, int montant, DateOnly dateC, int idClient)
+        {
+            Commande uneCommande;
+            bool vretour = true;
+            try
+            {
+                // récupération de la commande à modifier
+                uneCommande = RecupererCommande(idCde);
+
+                // mise à jour des champs
+                uneCommande.Montantcde = montant;
+                uneCommande.Datecde = dateC;
+                uneCommande.NumcliNavigation.Numcli = idClient; // #le cours de mercredi sur rappel POO
+
+                monModel.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                vretour = false;
+                MessageBox.Show(ex.Message.ToString());
+            }
+            return vretour;
+        }
+
     }
 }
 

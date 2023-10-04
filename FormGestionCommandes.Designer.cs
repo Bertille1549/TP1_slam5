@@ -42,6 +42,7 @@
             cbCommandes = new ComboBox();
             bsCommandes = new BindingSource(components);
             lblAM = new Label();
+            gbInfo = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
             SuspendLayout();
@@ -52,6 +53,7 @@
             textMontant.Name = "textMontant";
             textMontant.Size = new Size(125, 27);
             textMontant.TabIndex = 0;
+            textMontant.KeyPress += textMontant_KeyPress;
             // 
             // dtpCommande
             // 
@@ -130,7 +132,7 @@
             // cbCommandes
             // 
             cbCommandes.FormattingEnabled = true;
-            cbCommandes.Location = new Point(350, 52);
+            cbCommandes.Location = new Point(464, 52);
             cbCommandes.Name = "cbCommandes";
             cbCommandes.Size = new Size(189, 28);
             cbCommandes.TabIndex = 9;
@@ -139,12 +141,21 @@
             // 
             lblAM.AutoSize = true;
             lblAM.Font = new Font("Elephant", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            lblAM.Location = new Point(33, 21);
+            lblAM.Location = new Point(21, 12);
             lblAM.Name = "lblAM";
             lblAM.Size = new Size(294, 33);
             lblAM.TabIndex = 10;
             lblAM.Text = "Ajout d'une commande";
             lblAM.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // gbInfo
+            // 
+            gbInfo.Location = new Point(113, 86);
+            gbInfo.Name = "gbInfo";
+            gbInfo.Size = new Size(540, 193);
+            gbInfo.TabIndex = 11;
+            gbInfo.TabStop = false;
+            gbInfo.Text = "Informations de la commande";
             // 
             // FormGestionCommandes
             // 
@@ -162,6 +173,7 @@
             Controls.Add(cbListeCli);
             Controls.Add(dtpCommande);
             Controls.Add(textMontant);
+            Controls.Add(gbInfo);
             Name = "FormGestionCommandes";
             Text = "FormGestionCommandes";
             Load += FormGestionCommandes_Load;
@@ -186,5 +198,6 @@
         private ComboBox cbCommandes;
         private BindingSource bsCommandes;
         private Label lblAM;
+        private GroupBox gbInfo;
     }
 }

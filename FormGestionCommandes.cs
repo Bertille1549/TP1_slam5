@@ -48,27 +48,12 @@ namespace TP1
             cbCommandes.DisplayMember = "Datecde";
             bsCommandes.DataSource = Modele.listeCommande();
             cbCommandes.DataSource = bsCommandes;
+            cbCommandes.SelectedIndex = -1;
         }
 
-        private void FormGestionCommandes_Load(object sender, EventArgs e)
+        public void remplirListeClient()
         {
-            remplirListeCommandes();
-
-            if (etat == EtatGestion.Create) // cas etat create
-            {
-                lblAM.Text = "Ajout d'une commande";
-                btnAjout.Text = "Ajouter";
-                cbCommandes.Visible = false;
-            }
-            else // cas etat update
-            {
-                lblAM.Text = "Modification d'une commande";
-                btnAjout.Text = "Modifier";
-                btnAjout.Visible = false;
-                cbCommandes.Visible = true;
-                remplirListeCommandes();
-            }
-
+            // remplir la combox des clients
             cbListeCli.ValueMember = "NUMCLI";
             cbListeCli.DisplayMember = "nomComplet";
             // nomComplet est la concaténation du nom et prénom issu de la requête suivante
@@ -81,6 +66,46 @@ namespace TP1
             cbListeCli.DataSource = bsClients3;
             cbListeCli.SelectedIndex = -1;
         }
+
+        private void FormGestionCommandes_Load(object sender, EventArgs e)
+        {
+            remplirListeClient();
+
+            if (etat == EtatGestion.Create) // cas etat create
+            {
+                lblAM.Text = "Ajout d'une commande";
+                btnAjout.Text = "Ajouter";
+                gbInfo.Visible = true;
+                cbCommandes.Visible = false;
+            }
+            else // cas etat update
+            {
+                lblAM.Text = "Modification d'une commande";
+                btnAjout.Text = "Modifier";
+                btnAjout.Visible = true;
+                gbInfo.Visible = false;
+                cbCommandes.Visible = true;
+                remplirListeCommandes();
+            }
+        }
+
+        private void textMontant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && e.KeyChar != Convert.ToChar(Keys.Back))
+            {
+                MessageBox.Show("Erreur dans le format de saisie de l'année (que des chiffres)", "Erreur", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                e.Handled = true;
+            }
+        }
+
+        private void btn_annuler_Click(object sender, EventArgs e)
+        {
+            textMontant.Clear();
+            dtpCommande.Value = DateTime.Now;
+            cbListeCli.SelectedIndex = -1;
+        }
+
 
         // Ajout et modification d'une commande en fonction de son état
         private void btnAjout_Click(object sender, EventArgs e)
@@ -98,22 +123,28 @@ namespace TP1
                     dtCommande = dtpCommande.Value;
                     numCli = Convert.ToInt32(cbListeCli.SelectedValue);
 
+                    DateOnly dateC = DateOnly.FromDateTime(dtCommande);
+
                     if (etat == EtatGestion.Create) // cas de l'ajout
                     {
                         if (Modele.AjoutCommande(montant, dtCommande, numCli))
                         {
-                            MessageBox.Show("Commande ajoutée" + Modele.RetourneDerniereCommandeSaisie());
+                            MessageBox.Show("Commande ajoutée " + Modele.RetourneDerniereCommandeSaisie());
                             btn_annuler_Click(sender, e);
                         }
                     }
                     if (etat == EtatGestion.Update) // cas de la mise à jour
                     {
                         Commande commande = (Commande)bsCommandes.Current;
-                        //if (Modele.)
-
+                        if (Modele.ModifierCommande(commande.Numcde, montant, dateC, numCli))
+                        {
+                            MessageBox.Show("Commande modifiée");
+                            gbInfo.Visible = false;
+                            btnAjout.Visible = false;
+                            cbCommandes.SelectedIndex = -1;
+                            //btn_annuler_Click(sender, e);
+                        }
                     }
-
-
                 }
                 else
                 {
@@ -126,31 +157,26 @@ namespace TP1
             }
         }
 
-
-
-        private void btn_annuler_Click(object sender, EventArgs e)
-        {
-            textMontant.Clear();
-            dtpCommande.Value = DateTime.Now;
-            cbListeCli.SelectedIndex = -1;
-        }
-
         private void bsCommandes_CurrentChanged(Object sender, EventArgs e)
         {
             // si 1 commande est sélectionnée dans la liste
             if (cbCommandes.SelectedIndex != -1)
             {
                 // récup' de la commande sélectionnée
+                System.Type type = bsCommandes.Current.GetType();
+                int idCommande = (int)type.GetProperty("NUMCDE").GetValue(bsCommandes.Current, null);
                 Commande commande = (Commande)bsCommandes.Current;
 
                 //mise à jour des champs de la commande sélectionnée
                 textMontant.Text = commande.Montantcde.ToString();
-                //dtpCommande.Value = commande.Datecde.ToString(DateTime(dtpCommande));
+                dtpCommande.Value = commande.Datecde.DateOnly(dtpCommande_ValueChanged(sender, e));
                 cbListeCli.Text = commande.NumcliNavigation.Nomcli;
 
+                gbInfo.Visible = true;
                 btnAjout.Visible = true;
-
             }
+            else
+                gbInfo.Visible = false;
         }
 
 
