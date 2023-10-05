@@ -38,7 +38,7 @@ namespace TP1
         private void dtpCommande_ValueChanged(object sender, EventArgs e)
         {
             dtpCommande.Enabled = true;
-            dtpCommande.MinDate = new DateTime(2023, 08, 01);
+            dtpCommande.MinDate = new DateTime(2022,09,01);
         }
 
         private void remplirListeCommandes()
@@ -48,7 +48,7 @@ namespace TP1
             cbCommandes.DisplayMember = "Datecde";
             bsCommandes.DataSource = Modele.listeCommande();
             cbCommandes.DataSource = bsCommandes;
-            cbCommandes.SelectedIndex = -1;
+            //cbCommandes.SelectedIndex = -1;
         }
 
         public void remplirListeClient()
@@ -64,7 +64,7 @@ namespace TP1
                 nomComplet = x.Nomcli + " " + x.Prenomcli,
             });
             cbListeCli.DataSource = bsClients3;
-            cbListeCli.SelectedIndex = -1;
+            //cbListeCli.SelectedIndex = -1;
         }
 
         private void FormGestionCommandes_Load(object sender, EventArgs e)
@@ -142,7 +142,7 @@ namespace TP1
                             gbInfo.Visible = false;
                             btnAjout.Visible = false;
                             cbCommandes.SelectedIndex = -1;
-                            //btn_annuler_Click(sender, e);
+                            btn_annuler.Enabled = false;
                         }
                     }
                 }
@@ -163,14 +163,14 @@ namespace TP1
             if (cbCommandes.SelectedIndex != -1)
             {
                 // récup' de la commande sélectionnée
-                System.Type type = bsCommandes.Current.GetType();
-                int idCommande = (int)type.GetProperty("NUMCDE").GetValue(bsCommandes.Current, null);
+                //System.Type type = bsCommandes.Current.GetType();
+                //int idCommande = (int)type.GetProperty("NUMCDE").GetValue(bsCommandes.Current, null);
                 Commande commande = (Commande)bsCommandes.Current;
 
                 //mise à jour des champs de la commande sélectionnée
                 textMontant.Text = commande.Montantcde.ToString();
-                dtpCommande.Value = commande.Datecde.DateOnly(dtpCommande_ValueChanged(sender, e));
-                cbListeCli.Text = commande.NumcliNavigation.Nomcli;
+                dtpCommande.Value = commande.Datecde.Value.ToDateTime(TimeOnly.Parse("00:00"));
+                cbListeCli.ValueMember = commande.NumcliNavigation.Nomcli;
 
                 gbInfo.Visible = true;
                 btnAjout.Visible = true;
@@ -179,6 +179,10 @@ namespace TP1
                 gbInfo.Visible = false;
         }
 
+        private void cbCommandes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bsCommandes_CurrentChanged(sender, e);
+        }
 
     }
 }

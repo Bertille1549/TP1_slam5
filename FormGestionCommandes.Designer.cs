@@ -136,6 +136,7 @@
             cbCommandes.Name = "cbCommandes";
             cbCommandes.Size = new Size(189, 28);
             cbCommandes.TabIndex = 9;
+            cbCommandes.SelectedIndexChanged += cbCommandes_SelectedIndexChanged;
             // 
             // lblAM
             // 
