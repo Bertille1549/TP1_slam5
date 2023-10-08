@@ -76,6 +76,7 @@ namespace TP1
             catch (Exception ex)
             {
                 vretour = false;
+                MessageBox.Show(ex.Message.ToString());
             }
             return vretour;
         }
@@ -111,7 +112,7 @@ namespace TP1
                 // mise à jour des champs
                 uneCommande.Montantcde = montant;
                 uneCommande.Datecde = dateC;
-                uneCommande.NumcliNavigation.Numcli = idClient; // #le cours de mercredi sur rappel POO
+                uneCommande.Numcli = idClient; // #le cours de mercredi sur rappel POO
 
                 monModel.SaveChanges();
             }

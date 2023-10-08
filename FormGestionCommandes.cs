@@ -38,7 +38,7 @@ namespace TP1
         private void dtpCommande_ValueChanged(object sender, EventArgs e)
         {
             dtpCommande.Enabled = true;
-            dtpCommande.MinDate = new DateTime(2022,09,01);
+            dtpCommande.MinDate = new DateTime(2022, 09, 01);
         }
 
         private void remplirListeCommandes()
@@ -60,7 +60,7 @@ namespace TP1
 
             bsClients3.DataSource = (Modele.listeClients()).Select(x => new
             {
-                x.Numcli,
+                //x.Numcli,
                 nomComplet = x.Nomcli + " " + x.Prenomcli,
             });
             cbListeCli.DataSource = bsClients3;
@@ -113,7 +113,7 @@ namespace TP1
             int numCli = -1, montant = 0;
             DateTime dtCommande;
 
-            if (textMontant.Text != "" || montant >= 0 && cbListeCli.SelectedIndex != -1)
+            if (textMontant.Text != "" || montant >= 0 && cbListeCli.SelectedIndex != -1 || numCli != -1)
             {
                 // ajout possible si les champs monatnt et client sont remplis au moins
                 if (Convert.ToInt32(textMontant.Text) >= 0 && Convert.ToInt32(textMontant.Text) <= 150)
@@ -121,7 +121,7 @@ namespace TP1
                     // ajout possible si le montant est correcte
                     montant = Convert.ToInt32(textMontant.Text);
                     dtCommande = dtpCommande.Value;
-                    numCli = Convert.ToInt32(cbListeCli.SelectedValue);
+                    numCli = Convert.ToInt32(cbListeCli.SelectedIndex+1);
 
                     DateOnly dateC = DateOnly.FromDateTime(dtCommande);
 
@@ -163,14 +163,12 @@ namespace TP1
             if (cbCommandes.SelectedIndex != -1)
             {
                 // récup' de la commande sélectionnée
-                //System.Type type = bsCommandes.Current.GetType();
-                //int idCommande = (int)type.GetProperty("NUMCDE").GetValue(bsCommandes.Current, null);
-                Commande commande = (Commande)bsCommandes.Current;
+                Commande C = (Commande)bsCommandes.Current;
 
                 //mise à jour des champs de la commande sélectionnée
-                textMontant.Text = commande.Montantcde.ToString();
-                dtpCommande.Value = commande.Datecde.Value.ToDateTime(TimeOnly.Parse("00:00"));
-                cbListeCli.ValueMember = commande.NumcliNavigation.Nomcli;
+                textMontant.Text = C.Montantcde.ToString();
+                dtpCommande.Value = C.Datecde.Value.ToDateTime(TimeOnly.Parse("08:00"));
+                cbListeCli.Text = C.NumcliNavigation.Nomcli;
 
                 gbInfo.Visible = true;
                 btnAjout.Visible = true;
