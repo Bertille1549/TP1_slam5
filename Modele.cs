@@ -32,7 +32,14 @@ namespace TP1
         {
             List<Commande> lesCommandes = monModel.Commandes.Where(p => p.Numcli ==
            idClient).Include(p => p.NumcliNavigation).ToList();
+            /*List<Livraison> lesLivraisons = monModel.Livraisons.Where(p => p.Numcde ==
+           idClient).Include(p => p.NumcdeNavigation).ToList();*/
             return lesCommandes;
+        }
+
+        public static List<Livraison> listeLivraison()
+        {
+            return monModel.Livraisons.Include(a => a.NumcdeNavigation).ToList();
         }
 
 
@@ -58,19 +65,24 @@ namespace TP1
             return lesPartitions;
         }
 
-        public static bool AjoutCommande(int montant, DateTime dateC, int idClient)
+        public static bool AjoutCommande(int montant, DateTime dateC, int idClient, DateTime dateL)
         {
             Commande maCommande;
+            Livraison livraison;
             bool vretour = true;
             DateOnly dtC = DateOnly.FromDateTime(dateC);
+            DateOnly dtL = DateOnly.FromDateTime(dateL);
             try
             {                
                 maCommande = new Commande();
+                livraison = new Livraison();
                 maCommande.Montantcde = montant; // mise à jour des propriétés
                 maCommande.Datecde = dtC; // la propriété DateCde est en date dans la BD et dans la classe Commande, modifier si besoin.
                 maCommande.Numcli = idClient;
+                livraison.Dateprevue = dtL;
                 // ajout de l’objet : correspond à un insert
                 monModel.Commandes.Add(maCommande);
+                monModel.Livraisons.Add(livraison);
                 monModel.SaveChanges();
             }
             catch (Exception ex)

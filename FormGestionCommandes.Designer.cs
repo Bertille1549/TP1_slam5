@@ -43,8 +43,13 @@
             bsCommandes = new BindingSource(components);
             lblAM = new Label();
             gbInfo = new GroupBox();
+            dtpLivraison = new DateTimePicker();
+            lblLivraison = new Label();
+            bsLivraisons = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)bsClients3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).BeginInit();
+            gbInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)bsLivraisons).BeginInit();
             SuspendLayout();
             // 
             // textMontant
@@ -74,7 +79,7 @@
             // 
             // btnAjout
             // 
-            btnAjout.Location = new Point(279, 285);
+            btnAjout.Location = new Point(266, 350);
             btnAjout.Name = "btnAjout";
             btnAjout.Size = new Size(94, 29);
             btnAjout.TabIndex = 3;
@@ -111,7 +116,7 @@
             // 
             // btn_annuler
             // 
-            btn_annuler.Location = new Point(409, 285);
+            btn_annuler.Location = new Point(420, 350);
             btn_annuler.Name = "btn_annuler";
             btn_annuler.Size = new Size(94, 29);
             btn_annuler.TabIndex = 7;
@@ -151,12 +156,32 @@
             // 
             // gbInfo
             // 
+            gbInfo.Controls.Add(dtpLivraison);
+            gbInfo.Controls.Add(lblLivraison);
             gbInfo.Location = new Point(113, 86);
             gbInfo.Name = "gbInfo";
-            gbInfo.Size = new Size(540, 193);
+            gbInfo.Size = new Size(540, 245);
             gbInfo.TabIndex = 11;
             gbInfo.TabStop = false;
             gbInfo.Text = "Informations de la commande";
+            // 
+            // dtpLivraison
+            // 
+            dtpLivraison.Location = new Point(176, 161);
+            dtpLivraison.MinDate = new DateTime(2023, 10, 12, 0, 0, 0, 0);
+            dtpLivraison.Name = "dtpLivraison";
+            dtpLivraison.Size = new Size(250, 27);
+            dtpLivraison.TabIndex = 13;
+            dtpLivraison.ValueChanged += dtpLivraison_ValueChanged;
+            // 
+            // lblLivraison
+            // 
+            lblLivraison.AutoSize = true;
+            lblLivraison.Location = new Point(32, 166);
+            lblLivraison.Name = "lblLivraison";
+            lblLivraison.Size = new Size(131, 20);
+            lblLivraison.TabIndex = 12;
+            lblLivraison.Text = "Date de Livraison :";
             // 
             // FormGestionCommandes
             // 
@@ -180,6 +205,9 @@
             Load += FormGestionCommandes_Load;
             ((System.ComponentModel.ISupportInitialize)bsClients3).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsCommandes).EndInit();
+            gbInfo.ResumeLayout(false);
+            gbInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)bsLivraisons).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -200,5 +228,8 @@
         private BindingSource bsCommandes;
         private Label lblAM;
         private GroupBox gbInfo;
+        private DateTimePicker dtpLivraison;
+        private Label lblLivraison;
+        private BindingSource bsLivraisons;
     }
 }

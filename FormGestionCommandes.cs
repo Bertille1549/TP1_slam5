@@ -41,6 +41,12 @@ namespace TP1
             dtpCommande.MinDate = new DateTime(2022, 09, 01);
         }
 
+        private void dtpLivraison_ValueChanged(object sender, EventArgs e)
+        {
+            dtpLivraison.Enabled = true;
+            dtpLivraison.MinDate = DateTime.Now;
+        }
+
         private void remplirListeCommandes()
         {
             // remplir la combobox des commandes (si modification)
@@ -112,6 +118,7 @@ namespace TP1
         {
             int numCli = -1, montant = 0;
             DateTime dtCommande;
+            DateTime dtLivraison;
 
             if (textMontant.Text != "" || montant >= 0 && cbListeCli.SelectedIndex != -1 || numCli != -1)
             {
@@ -121,13 +128,15 @@ namespace TP1
                     // ajout possible si le montant est correcte
                     montant = Convert.ToInt32(textMontant.Text);
                     dtCommande = dtpCommande.Value;
-                    numCli = Convert.ToInt32(cbListeCli.SelectedIndex+1);
+                    numCli = Convert.ToInt32(cbListeCli.SelectedIndex + 1);
+                    dtLivraison = dtpLivraison.Value;
 
                     DateOnly dateC = DateOnly.FromDateTime(dtCommande);
+                    DateOnly dateL = DateOnly.FromDateTime(dtLivraison);
 
                     if (etat == EtatGestion.Create) // cas de l'ajout
                     {
-                        if (Modele.AjoutCommande(montant, dtCommande, numCli))
+                        if (Modele.AjoutCommande(montant, dtCommande, numCli, dtLivraison))
                         {
                             MessageBox.Show("Commande ajoutée " + Modele.RetourneDerniereCommandeSaisie());
                             btn_annuler_Click(sender, e);
@@ -181,6 +190,7 @@ namespace TP1
         {
             bsCommandes_CurrentChanged(sender, e);
         }
+
 
     }
 }

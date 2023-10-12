@@ -70,10 +70,11 @@ namespace TP1
                 x.Datecde,
                 x.Montantcde,
                 x.NumcliNavigation.Nomcli,
-                x.NumcliNavigation.Prenomcli
+                x.NumcliNavigation.Prenomcli,
             })
             .OrderBy(x => x.Datecde);
             dgvCommande.DataSource = bsCommande;
+
 
         }
 

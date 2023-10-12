@@ -21,13 +21,17 @@ public partial class BddPartitionsBpContext : DbContext
 
     public virtual DbSet<Commande> Commandes { get; set; }
 
+    public virtual DbSet<Etat> Etats { get; set; }
+
+    public virtual DbSet<Livraison> Livraisons { get; set; }
+
     public virtual DbSet<Partition> Partitions { get; set; }
 
     public virtual DbSet<Style> Styles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=127.0.0.1;port=3306;user=root;database=bdd_partitions_bp", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.28-mariadb"));
+        => optionsBuilder.UseMySql("server=127.0.0.1;port=3306;user=root;database=bdd_partitions_bp", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.4.27-mariadb"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -57,8 +61,6 @@ public partial class BddPartitionsBpContext : DbContext
             entity.HasKey(e => e.Numcli).HasName("PRIMARY");
 
             entity.ToTable("client");
-
-            entity.HasIndex(e => e.Telcli, "TELCLI").IsUnique();
 
             entity.Property(e => e.Numcli)
                 .HasColumnType("int(11)")
@@ -128,6 +130,55 @@ public partial class BddPartitionsBpContext : DbContext
                     });
         });
 
+        modelBuilder.Entity<Etat>(entity =>
+        {
+            entity.HasKey(e => e.Numetat).HasName("PRIMARY");
+
+            entity.ToTable("etat");
+
+            entity.Property(e => e.Numetat)
+                .ValueGeneratedNever()
+                .HasColumnType("int(2)")
+                .HasColumnName("NUMETAT");
+            entity.Property(e => e.Libelleetat)
+                .HasMaxLength(50)
+                .HasColumnName("LIBELLEETAT");
+        });
+
+        modelBuilder.Entity<Livraison>(entity =>
+        {
+            entity.HasKey(e => e.Numliv).HasName("PRIMARY");
+
+            entity.ToTable("livraison");
+
+            entity.HasIndex(e => e.Numcde, "I_FK_LIVRAISON_COMMANDE");
+
+            entity.HasIndex(e => e.Etat, "I_FK_LIVRAISON_ETAT");
+
+            entity.Property(e => e.Numliv)
+                .ValueGeneratedNever()
+                .HasColumnType("int(10)")
+                .HasColumnName("NUMLIV");
+            entity.Property(e => e.Dateeffective).HasColumnName("DATEEFFECTIVE");
+            entity.Property(e => e.Dateprevue).HasColumnName("DATEPREVUE");
+            entity.Property(e => e.Etat)
+                .HasColumnType("int(2)")
+                .HasColumnName("ETAT");
+            entity.Property(e => e.Numcde)
+                .HasColumnType("int(10)")
+                .HasColumnName("NUMCDE");
+
+            entity.HasOne(d => d.EtatNavigation).WithMany(p => p.Livraisons)
+                .HasForeignKey(d => d.Etat)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LIVRAISON_ETAT");
+
+            entity.HasOne(d => d.NumcdeNavigation).WithMany(p => p.Livraisons)
+                .HasForeignKey(d => d.Numcde)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_LIVRAISON_COMMANDE");
+        });
+
         modelBuilder.Entity<Partition>(entity =>
         {
             entity.HasKey(e => e.Numpart).HasName("PRIMARY");
@@ -152,7 +203,7 @@ public partial class BddPartitionsBpContext : DbContext
             entity.HasOne(d => d.NumstyleNavigation).WithMany(p => p.Partitions)
                 .HasForeignKey(d => d.Numstyle)
                 .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_PARTITION_STYLE");
+                .HasConstraintName("I_FK_PARTITION_STYLE");
 
             entity.HasMany(d => d.Numauts).WithMany(p => p.Numparts)
                 .UsingEntity<Dictionary<string, object>>(

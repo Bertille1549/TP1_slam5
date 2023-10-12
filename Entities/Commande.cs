@@ -13,6 +13,8 @@ public partial class Commande
 
     public int? Montantcde { get; set; }
 
+    public virtual ICollection<Livraison> Livraisons { get; set; } = new List<Livraison>();
+
     public virtual Client NumcliNavigation { get; set; } = null!;
 
     public virtual ICollection<Partition> Numparts { get; set; } = new List<Partition>();
